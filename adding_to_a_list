@@ -1,0 +1,93 @@
+<xhtml>
+<head>
+<title>Assignment 6ish</title>
+</head>
+<body>
+
+//using the form method as we did on week 2
+<form method="GET" action=<?php echo $_SERVER['PHP_SELF']?>>
+Please enter a question:
+<input type="text" name="questionin" size="20">
+<br>
+<br>
+Select the section to add your question to:
+<p>
+
+//selecting the section could be useful for putting comments into a particular section
+<select name = "sectionin"
+        <option value = "assignment4.1">assignment4.1</option>
+        <option value = "assignment4.2">assignment4.2</option>
+        <option value = "assignment4.3">assignment4.3</option>
+        <option value = "assignment4.4">assignment4.4</option>
+        <option value = "assignment4.5">assignment4.5</option>
+        <option value = "assignment4.6">assignment4.6</option>
+        <option value = "assignment4.7">assignment4.7</option>
+        <option value = "assignment4.8">assignment4.8</option>
+</select>
+<input type = "submit">
+<head>
+<title>Questions</title>
+</head>
+<!--STYLE of form-->
+<style>
+ body {background color:lightgrey}
+ h1{color:blue}
+
+//style however you want - i grabbed this from a  previous assignment that was working with GET and POST functions
+
+
+</style>
+<body>
+<h1 style= "text-align:center">
+adding questions to questions</h1>
+<h2 style= "text-align:center"
+
+<?php
+/* This script receives a variable from form.html
+called username and using the GET method.
+Using the POST method would prevent me from seeing the result in the address ba$
+/*General structure-psuedocode-
+1. GET $question from form
+2. GET $section from form (array)
+4. PRINT $user (string)
+5. PRINT $course (array)
+6. PRINT $date (string)
+*/
+
+//embarassing few lines below but has real world application
+error_reporting(E_ALL ^ E_NOTICE);
+$question = $_GET['questionin'];
+$section = $_GET['sectionin'];
+
+//i called this a string because my hope was to fun a nl2br
+
+//file_put_contents can be run without assigning variable name to it
+
+$string = file_put_contents("$section.txt", "\n" . print_r($question, true),
+FILE_APPEND );
+
+//echoing the nl2br should be putting a "<br/> at the end of the line going to the text file... if this works, it would format the the html being read by the browser better
+
+//interestingly its printing to the text file in order...however without the <br> it doesn't read back with breaks!
+
+
+echo nl2br($string);
+
+//$file were from previous assignment
+
+
+$files = array('assignment4.1.txt', 'assignment4.2.txt', 'assignment4.3.txt',
+'assignment4.4.txt', 'assignment4.5.txt',
+'assignment4.6.txt','assignment4.7.txt', 'assignment4.8.txt');
+
+//for each function to iterate over arrays
+foreach($files AS $file)
+   {
+       include $file;
+}
+
+?>
+</form>
+</body>
+</xhtml>
+
